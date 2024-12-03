@@ -1,6 +1,7 @@
 def main():
 
     sum = 0
+    yes = 0
 
     file_path = 'input.txt'
 
@@ -14,16 +15,24 @@ def main():
     
     i = 0
     while i < len(list):
+        yes = 0
         j = 0
         nums = list[i].split(" ")
+        
         while j < len(nums):
-            if (all_decreasing(nums) and difference_level(nums, "decreasing")):
-                sum += 1
-            elif (all_increasing(nums) and difference_level(nums, "increasing")):
-                sum += 1
-            j += 1
-        i += 1
+            nums_temp = nums[:j] + nums[j+1:]
 
+            if (all_decreasing(nums_temp) and difference_level(nums_temp, "decreasing")):
+                yes += 1
+            elif (all_increasing(nums_temp) and difference_level(nums_temp, "increasing")):
+                yes += 1
+            
+            j += 1
+
+        if yes > 0:
+            sum += 1
+
+        i += 1
 
     print("THE ANSWER IS:", sum)
 
